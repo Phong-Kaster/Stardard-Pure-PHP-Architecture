@@ -12,8 +12,6 @@
 - [**Initialization**](#initialization)
 - [**Installation**](#installation)
 - [**Controller**](#controller)
-- [**Features**](#features)
-- [**Post Script**](#post-script)
 - [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with--and-php-)
 
 # [**Initialization**](#initialization)
@@ -93,10 +91,26 @@ Và sau khi bảng này đã hoàn thiện thì có thể đăng nhập bình th
 
 Dưới đây là những controller quan trọng có lẽ không nên xóa đi
 
+**CHANGE PASSWORD**: thay đổi mật khẩu
 
-# [**Features**](#features)
-So she was considering in her own mind (as well as she could, for the hot day made her feel very sleepy and stupid), whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her.
-# [**Post Script**](#post-script)
-There was nothing so very remarkable in that; nor did Alice think it so very much out of the way to hear the Rabbit say to itself, “Oh dear! Oh dear! I shall be late!” (when she thought it over afterwards, it occurred to her that she ought to have wondered at this, but at the time it all seemed quite natural); but when the Rabbit actually took a watch out of its waistcoat-pocket, and looked at it, and then hurried on, Alice started to her feet, for it flashed across her mind that she had never before seen a rabbit with either a waistcoat-pocket, or a watch to take out of it, and burning with curiosity, she ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.
+**CRON**: cào dữ liệu từ các trang khác
+
+**INDEX**: xử lý ở trang chủ
+
+**LOGIN**: đăng nhập
+
+**LOGOUT**: đăng xuất
+
+**PASSWORD RESET**: khôi phục mật khẩu
+
+**PROFILE**: xử lý thông tin cá nhân khi đăng nhập 
+
+**RECOVERY**: khôi phục tài khoản
+
+**SETTING**: cài đặt trang 
+
+**SIGN UP**: đăng kí mới tài khoản
+
+**USERS**: quản lý người dùng
  
 # [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with-love-and-php)
