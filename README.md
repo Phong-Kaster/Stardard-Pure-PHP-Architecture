@@ -12,6 +12,10 @@
 - [**Initialization**](#initialization)
 - [**Installation**](#installation)
 - [**Controller**](#controller)
+- [**SQL**](#sql)
+  - [**Informal Query**](#informal-query)
+  - [**Formal Query**](#formal-query)
+- [**Copy A Front-end Website**](#copy-a-front-end-website)
 - [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with--and-php-)
 
 # [**Initialization**](#initialization)
@@ -113,4 +117,143 @@ Dưới đây là những controller quan trọng có lẽ không nên xóa đi
 
 **USERS**: quản lý người dùng
  
+# [**SQL**](#sql)
+
+Có 2 cách truy vấn trong dự án này được sử dụng: truy vấn thuần & truy vấn theo cú pháp quy ước.
+
+## [**Informal Query**](#informal-query)
+
+Dưới đây là cách viết truy thuần có thể sử dụng trong dự án này.
+
+    //code...
+    $query = DB::query("select count(*) as aggregate 
+                        from (select '1' as `row_count` 
+                              from `".TABLE_PREFIX.TABLE_TRANSACTIONS."` 
+                              where `type` = ' ".$type." ' 
+                              and `user_id` = ".$AuthUser->get("id")." ) 
+                              count_row_table");
+                              
+    $result = $query->get();
+    $totalRecord = $result[0]->aggregate;
+
+Câu truy vấn phía trên giúp chúng ta đếm xem có bao nhiêu bản ghi trong bảng `TABLE_TRANSACTIONS` với điều kiện `type` & `user_id` tương ứng.
+
+Hoặc thêm một ví dụ khác như sau 
+
+    $month = date('m');
+    $year = date('Y');
+    $today = date('Y-m-d');
+    $sevendayago = date('Y-m-d', strtotime($today. ' - 7 days')); 
+
+
+    // query to get sum(amount) in a month
+    $queryMonth = DB::query("select SUM(AMOUNT) as aggregate
+    from `".TABLE_PREFIX.TABLE_TRANSACTIONS."` 
+    where `user_id` = '".$AuthUser->get("id")."' 
+    and `type` = '".$type."' 
+    and `transactiondate` between '".$year."-".$month."-01' and '".$today."'");
+
+
+    $result = $queryMonth->get();
+    $resp->month = $result[0]->aggregate;
+
+Câu truy vấn này giúp chúng ta truy vấn xem tổng số tiền giao dịch của bảng `TABLE_TRANSACTIONS` với điều kiện `user_id`, `type` và `transactiondate` tương ứng.
+
+Kết quả của các câu truy vấn này được trả về dưới dạng mảng. Nên nếu lấy ta phải chỉ định rõ như sau
+
+Đối với ví dụ thứ nhất: 
+
+    $totalRecord = $result[0]->aggregate;
+
+Đối với ví dụ thứ hai: 
+
+    $resp->month = $result[0]->aggregate;
+
+## [**Formal Query**](#formal-query)
+
+Đối với cách viết quy ước thì hướng dẫn viết tại [đây](https://github.com/usmanhalalit/pixie?fbclid=IwAR1raGRcZXsvxxMRvZBq74WPTbIRhc9XJdR8P_PTVA1DJvanCAlaenU3ATA)
+
+Dưới đây là ví dụ cho cách viết này: 
+
+Câu truy vấn(1):
+
+    $query = DB::table(TABLE_PREFIX.TABLE_ACCOUNTS)
+                ->where("user_id", $AuthUser->get("id"))
+                ->select([
+                    "name","balance"
+                ]);
+
+Câu truy vấn (1) sẽ trả về `name` và `balance` theo `user_id` của bảng `TABLE_ACCOUNTS`
+
+Câu truy vấn(2):
+
+    $query = DB::table(TABLE_PREFIX.TABLE_CATEGORIES)
+                    ->where(TABLE_PREFIX.TABLE_CATEGORIES.".user_id", "=", $AuthUser->get("id"))
+                    ->where(TABLE_PREFIX.TABLE_CATEGORIES.".type" , "=", $type)
+                    ->leftJoin(TABLE_PREFIX.TABLE_TRANSACTIONS,
+                        TABLE_PREFIX.TABLE_TRANSACTIONS.".category_id",
+                        "=",
+                        TABLE_PREFIX.TABLE_CATEGORIES.".id")
+                    ->select([
+                        TABLE_PREFIX.TABLE_CATEGORIES.".*",
+                        DB::raw("sum(".TABLE_PREFIX.TABLE_TRANSACTIONS.".amount) as totalAmount" )
+                    ])
+                    ->groupBy(TABLE_PREFIX.TABLE_CATEGORIES.".name");
+
+Câu truy vấn(2) sẽ trả về tất cả các cột của `TABLE_CATEGORIES` và cột `totalAmount` - tổng của tất cả giao dịch theo từng tên danh mục(TABLE_CATEGORIES."name")
+
+Câu truy vấn(3):
+
+    $date = new \Moment\Moment("now", date_default_timezone_get());
+    // for income
+    $query = DB::table(TABLE_PREFIX.TABLE_TRANSACTIONS)
+                    ->select(DB::raw("sum(amount) as total, month(transactiondate) as month"))
+                    ->where("user_id", "=", $AuthUser->get("id"))
+                    ->where("type", "=", 1)
+                    ->whereBetween("transactiondate", $date->startOf('year')->format("Y-m-d"), $date->endOf('year')->format("Y-m-d"))
+                    ->groupBy("month")
+                    ->orderBy("month");
+
+Câu truy vấn(3) trả về cột `month` và `total` - tổng giá trị của giao dịch theo từng tháng
+
+> Note: Tất cả các câu truy vấn này được trả về dưới dạng mảng. 
+
+Ta sẽ lấy dữ liệu và truyền vào mảng data như sau:
+
+    foreach( $result as $r )
+    {
+        $data[] = array(
+            "id" => $r->id,
+            "name" => $r->name,
+            "amount" => isset($r->totalAmount) ? (double)$c->totalAmount : 0,
+            "..." => $r->...,
+            "..." => $r->...
+        );
+    }
+
+# [**Copy A Front-end Website**](#copy-a-front-end-website)
+
+Để sao chép được các tệp tin HTML, CSS và JavaScript của một webstite nào đó. Chúng ta sử dụng [wget](#) để thực hiện. 
+
+Hướng dẫn chi tiết sử dụng `wget` tại [đây](https://www.jcchouinard.com/wget/).
+
+Ví dụ minh họa, có 3 tệp tin CSS ở 3 đường dẫn phía dưới như sau:
+
+    http://moneyprodemo.captivlab.com/css/bootstrap-datepicker.css
+    http://moneyprodemo.captivlab.com/css/paper-dashboard.css
+    http://moneyprodemo.captivlab.com/plugin/datatables/css/dataTables.bootstrap.css
+
+Để tải 3 tệp tin này về sẽ sử dụng 3 câu lệnh sau:
+
+    wget -nd -nH http://moneyprodemo.captivlab.com/css/bootstrap-datepicker.css
+    wget -nd -nH http://moneyprodemo.captivlab.com/css/paper-dashboard.css
+    wget -nd -nH http://moneyprodemo.captivlab.com/plugin/datatables/css/dataTables.bootstrap.css
+
+Và kết quả sẽ như hình phía dưới:
+
+<p align="center">
+    <img src="./avatar/screenshot9.png" width="640" />
+</p>
+
+Bằng cách này, chúng ta có thể download tất cả các tệp tin cần thiết của một webstite.
 # [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with-love-and-php)
