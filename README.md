@@ -249,6 +249,13 @@ Ví dụ minh họa, có 3 tệp tin CSS ở 3 đường dẫn phía dưới nh�
     wget -nd -nH http://moneyprodemo.captivlab.com/css/paper-dashboard.css
     wget -nd -nH http://moneyprodemo.captivlab.com/plugin/datatables/css/dataTables.bootstrap.css
 
+Và mở `cmd`, `powershell` hoặc `gitbash`. Chép 3 lệnh phía trên nhấn Enter:
+
+<p align="center">
+<img src="./avatar/screenshot10.png" width="640" />
+</p>
+
+
 Và kết quả sẽ như hình phía dưới:
 
 <p align="center">
