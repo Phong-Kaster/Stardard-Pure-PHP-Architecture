@@ -263,4 +263,33 @@ Và kết quả sẽ như hình phía dưới:
 </p>
 
 Bằng cách này, chúng ta có thể download tất cả các tệp tin cần thiết của một webstite.
+
+> Note: Khi nhấn tổ hợp phím `Ctrl + U` hoặc bất kì tổ hợp nào mà màn Google Developer Tool không hiện ra. Thì nguyên nhân là do trong javascript của webstite đó đang chứa một đoạn code có dạng như sau:
+
+    document.onkeydown = function(e) 
+    {
+			if(e.keyCode == 123) 
+            {
+			 return false;
+			}
+			if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))
+            {
+			 return false;
+			}
+			if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0))
+            {
+			 return false;
+			}
+			if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))
+            {
+			 return false;
+			}
+		
+			if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0))
+            {
+			 return false;
+			}      
+	};
+
+> Đoạn code này có thể vô hiệu hóa tổ hợp phím ctrl bất kì. Để khắc phục, hãy F5 làm mới website và nhanh tay ấn `Ctrl + U` trước khi website hiện thị đầy đủ.
 # [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with-love-and-php)
