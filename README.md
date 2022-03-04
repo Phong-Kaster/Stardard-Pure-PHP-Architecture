@@ -16,6 +16,8 @@
   - [**Informal Query**](#informal-query)
   - [**Formal Query**](#formal-query)
 - [**Copy A Front-end Website**](#copy-a-front-end-website)
+- [**FAQ**](#faq)
+  - [**1. Can't Press Ctrl + U or Right-Click with Mouse**](#1-cant-press-ctrl--u-or-right-click-with-mouse)
 - [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with--and-php-)
 
 # [**Initialization**](#initialization)
@@ -264,7 +266,10 @@ Và kết quả sẽ như hình phía dưới:
 
 Bằng cách này, chúng ta có thể download tất cả các tệp tin cần thiết của một webstite.
 
-> Note: Khi nhấn tổ hợp phím `Ctrl + U` hoặc bất kì tổ hợp nào mà màn Google Developer Tool không hiện ra. Thì nguyên nhân là do trong javascript của webstite đó đang chứa một đoạn code có dạng như sau:
+# [**FAQ**](#fag)
+## [**1. Can't Press Ctrl + U or Right-Click with Mouse**](#1-cant-press-ctrl--u-or-right-click-with-mouse)
+
+Khi nhấn tổ hợp phím `Ctrl + U` hoặc bất kì tổ hợp nào mà màn Google Developer Tool không hiện ra. Thì nguyên nhân là do trong javascript của webstite đó đang chứa một đoạn code có dạng như sau:
 
     document.onkeydown = function(e) 
     {
@@ -291,5 +296,22 @@ Bằng cách này, chúng ta có thể download tất cả các tệp tin cần 
 			}      
 	};
 
-> Đoạn code này có thể vô hiệu hóa tổ hợp phím ctrl bất kì. Để khắc phục, hãy F5 làm mới website và nhanh tay ấn `Ctrl + U` trước khi website hiện thị đầy đủ.
+Hoặc vô hiệu hóa mọi thao tác trên màn hình website với đoạn chương trình sau:
+
+	$("html").on("contextmenu",function()
+    {
+	 		return false;
+	});
+
+Đoạn code này có thể vô hiệu hóa tổ hợp phím Ctrl bất kì.
+
+**Cách 1**: Hãy F5 làm mới website và nhanh tay ấn `Ctrl + U` trước khi website hiện thị đầy đủ.
+
+**Cách 2**: Trên thanh tìm kiếm Google, sử dụng cú pháp `view-source:<đường dẫn mong muốn>` để xem trang trực tiếp HTML luôn.
+
+Ví dụ: để xem trang shop-load-more.html nhưng trang này bị khóa các tổ hợp phím hoặc chuột phải
+
+    view-source:https://bestwebcreator.com/shopwise/demo/shop-load-more.html
+
+
 # [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with-love-and-php)
