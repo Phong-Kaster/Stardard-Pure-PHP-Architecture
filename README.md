@@ -273,37 +273,40 @@ Khi nhấn tổ hợp phím `Ctrl + U` hoặc bất kì tổ hợp nào mà màn
 
     document.onkeydown = function(e) 
     {
-			if(e.keyCode == 123) 
-            {
-			 return false;
-			}
-			if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))
-            {
-			 return false;
-			}
-			if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0))
-            {
-			 return false;
-			}
-			if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))
-            {
-			 return false;
-			}
+		if(e.keyCode == 123) 
+		{
+			return false;
+		}
 		
-			if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0))
-            {
-			 return false;
-			}      
+		if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))
+		{
+			return false;
+		}
+		
+		if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0))
+		{
+			return false;
+		}
+		
+		if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))
+		{
+			return false;
+		}
+	
+		if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0))
+		{
+			return false;
+		}      
 	};
 
 Hoặc vô hiệu hóa mọi thao tác trên màn hình website với đoạn chương trình sau:
 
 	$("html").on("contextmenu",function()
     {
-	 		return false;
+	 	return false;
 	});
 
-Đoạn code này có thể vô hiệu hóa tổ hợp phím Ctrl bất kì.
+Có 2 cách có thể khắc phục được việc bị chặn các nút thao tác trên website đó như sau:
 
 **Cách 1**: Hãy F5 làm mới website và nhanh tay ấn `Ctrl + U` trước khi website hiện thị đầy đủ.
 
