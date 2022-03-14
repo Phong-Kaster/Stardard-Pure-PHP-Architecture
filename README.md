@@ -15,6 +15,7 @@
 - [**SQL**](#sql)
   - [**Informal Query**](#informal-query)
   - [**Formal Query**](#formal-query)
+- [**Global Variable**](#global-variable)
 - [**Copy A Front-end Website**](#copy-a-front-end-website)
 - [**FAQ**](#faq)
   - [**1. Can't Press Ctrl + U or Right-Click with Mouse**](#1-cant-press-ctrl--u-or-right-click-with-mouse)
@@ -92,6 +93,8 @@ Và sau khi bảng này đã hoàn thiện thì có thể đăng nhập bình th
 <p align="center">
     <img src="./avatar/screenshot8.png" width="640" />
 </p>
+
+Sau khi quá trình cài đặt hoàn tất, ta có thể xóa bỏ hoàn toàn thư mục **Install** đi vì không còn giá trị sử dụng nữa !
 
 # [**Controller**](#controller)
 
@@ -232,6 +235,22 @@ Ta sẽ lấy dữ liệu và truyền vào mảng data như sau:
             "..." => $r->...
         );
     }
+
+# [**Global Variable**](#global-variable)
+
+Những biến toàn cục cần nằm trong thư mục **app->config->config.php** là những biến có giá trị sử dụng trong toàn bộ chương trình này !
+
+- **APPURL**     : D:\xampp\htdocs\Cellphone-Shop/app
+
+- **THEME_PATH** : D:\xampp\htdocs\Cellphone-Shop/app/inc/themes
+
+- **THEME_URL**  : D:\xampp\htdocs\Cellphone-Shop/inc/themes
+
+- **ROOTPATH**   : D:\xampp\htdocs\Cellphone-Shop
+
+- **APPPATH**    : D:\xampp\htdocs\Cellphone-Shop\app
+
+
 
 # [**Copy A Front-end Website**](#copy-a-front-end-website)
 
