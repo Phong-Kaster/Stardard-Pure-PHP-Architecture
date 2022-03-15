@@ -16,6 +16,7 @@
   - [**Informal Query**](#informal-query)
   - [**Formal Query**](#formal-query)
 - [**Global Variable**](#global-variable)
+- [**Error Traceability**](#error-traceability)
 - [**Copy A Front-end Website**](#copy-a-front-end-website)
 - [**FAQ**](#faq)
   - [**1. Can't Press Ctrl + U or Right-Click with Mouse**](#1-cant-press-ctrl--u-or-right-click-with-mouse)
@@ -250,7 +251,36 @@ Những biến toàn cục cần nằm trong thư mục **app->config->config.ph
 
 - **APPPATH**    : D:\xampp\htdocs\Cellphone-Shop\app
 
+# [**Error Traceability**](#error-traceability)
 
+Để truy vết được các lỗi xảy ra trong quá trình xây dựng phần mềm, ta cần một tệp tin `php_error_log.log` để dễ truy vết nơi xảy ra sự cố hơn. Bằng cách chép đoạn mã dưới đây vào tệp tin `index.php` ở thư mục gốc:
+
+        ini_set('display_errors', 1);
+        ini_set('log_errors', 1);
+        ini_set('error_log',dirname(__FILE__).'/php_error_log.log');
+        error_reporting(E_ALL);
+
+Và tạo tại thư mục gốc một tệp tin là `php_error_log.log`. Tệp tin này sẽ truy vết và ghi lại mọi lỗi xảy ra trong chương trình
+
+Để lấy thêm chi tiết, ta có thể dùng đến Apache `error.log` - cái này chi tiết hơn cái bên trên. Bằng cách mở đường dẫn 
+
+    D:/xampp/apache/conf/httpd.conf
+
+Nhấn tổ hợp `Ctrl + F` tìm cụm từ **logs/error.log**, thay thế cụm từ này thành đường dẫn muốn. Ví dụ:
+
+    D:/xampp/htdocs/Cellphone-Shop/error.log
+
+Lúc này, tên tin `error.log` sẽ hiện trong thư mục thay vì vị trí cũ của nó 💥
+
+<p align="center">
+    <img src="./avatar/screenshot11.png" />
+</p>
+
+<h3 align="center">
+
+*Vị trị tệp tin error.log*
+
+</h3>
 
 # [**Copy A Front-end Website**](#copy-a-front-end-website)
 
