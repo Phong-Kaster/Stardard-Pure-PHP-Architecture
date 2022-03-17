@@ -20,6 +20,7 @@
 - [**Copy A Front-end Website**](#copy-a-front-end-website)
 - [**FAQ**](#faq)
   - [**1. Can't Press Ctrl + U or Right-Click with Mouse**](#1-cant-press-ctrl--u-or-right-click-with-mouse)
+  - [**Get Rid Of A Table From Source**](#get-rid-of-a-table-from-source)
 - [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with--and-php-)
 
 # [**Initialization**](#initialization)
@@ -241,15 +242,14 @@ Ta sẽ lấy dữ liệu và truyền vào mảng data như sau:
 
 Những biến toàn cục cần nằm trong thư mục **app->config->config.php** là những biến có giá trị sử dụng trong toàn bộ chương trình này !
 
-- **APPURL**     : D:\xampp\htdocs\Cellphone-Shop/app
+| Tên        | Đường dẫn                                     |
+|------------|-----------------------------------------------|
+| APPURL     | D:\xampp\htdocs\Cellphone-Shop/app            |
+| THEME_PATH | D:\xampp\htdocs\Cellphone-Shop/app/inc/themes |
+| THEME_URL  | D:\xampp\htodcs\Cellphone-Shop\inc\themes     |
+| ROOTPATH   | D:\xampp\htdocs\Cellphone-Shop                |
+| APPPATH    | D:\xampp\htdocs\Cellphone\app                 |
 
-- **THEME_PATH** : D:\xampp\htdocs\Cellphone-Shop/app/inc/themes
-
-- **THEME_URL**  : D:\xampp\htdocs\Cellphone-Shop/inc/themes
-
-- **ROOTPATH**   : D:\xampp\htdocs\Cellphone-Shop
-
-- **APPPATH**    : D:\xampp\htdocs\Cellphone-Shop\app
 
 # [**Error Traceability**](#error-traceability)
 
@@ -257,12 +257,12 @@ Những biến toàn cục cần nằm trong thư mục **app->config->config.ph
 
         ini_set('display_errors', 1);
         ini_set('log_errors', 1);
-        ini_set('error_log',dirname(__FILE__).'/php_error_log.log');
+        ini_set('error_log',dirname(__FILE__).'/error_php_log.log');
         error_reporting(E_ALL);
 
-Và tạo tại thư mục gốc một tệp tin là `php_error_log.log`. Tệp tin này sẽ truy vết và ghi lại mọi lỗi xảy ra trong chương trình
+Và tạo tại thư mục gốc một tệp tin là `error_php_log.log`. Tệp tin này sẽ truy vết và ghi lại mọi lỗi xảy ra trong chương trình
 
-Để lấy thêm chi tiết, ta có thể dùng đến Apache `error.log` - cái này chi tiết hơn cái bên trên. Bằng cách mở đường dẫn 
+Để lấy thêm chi tiết, ta có thể dùng đến Apache `error.log` - cái này chi tiết hơn cái bên trên. Bằng cách mở đường dẫn cài đặt XAMPP tới thư mục **apache/conf** như ví dụ sau đây: 
 
     D:/xampp/apache/conf/httpd.conf
 
@@ -365,5 +365,54 @@ Ví dụ: để xem trang shop-load-more.html nhưng trang này bị khóa các 
 
     view-source:https://bestwebcreator.com/shopwise/demo/shop-load-more.html
 
+## [**Get Rid Of A Table From Source**](#get-rid-of-a-table-from-source)
+
+Loại bỏ sự tồn tại của một bảng đã được tạo sẵn trong source code này bao gồm quy trình 4 bước 
+
+**Bước 1**: truy cập **app->config->db.config.php** để xóa lệnh khai báo biến toàn cục dành cho bảng dữ liệu muốn xóa. Giả sử, để xóa bảng OPTION thì ta sẽ làm theo các bước như sau
+
+<p align="center">
+    <img src="./avatar/screenshot12.png" height="200" />
+</p>
+
+<h3 align="center">
+
+*Giả sử cần xóa bảng OPTION thì xóa dòng số 23 đi*
+
+</h3>
+
+**Bước 2**: truy cập **app->controllers** để xóa 2 controller dạng số ít và số nhiều của bảng OPTIONS nếu tồn tại, được đặt tên là
+
+- Option Controller 
+
+- Options Controller
+
+**Bước 3**: truy cập **app->models** để xóa 2 model dạng số ít và số nhiều của bảng OPTIONS điều
+
+<p align="center">
+    <img src="./avatar/screenshot13.png" width="640"  />
+</p>
+
+<h3 align="center">
+
+*Xóa Option Model và Options Model đi !*
+
+</h3>
+
+**Bước 4**: lúc này cần F5 làm mới trang để dò ra trong Controller còn lại. Controller nào đang gọi đến OPTION model thì phải xóa đi để tránh lỗi.
+
+> Lưu ý: riêng bảng OPTION, trong **app->helpers->theme.helper.php** có hàm active_theme() - dòng thứ 12.
+
+Bảng OPTION này sẽ lưu lại tùy chọn để sử dụng ReCaptcha. Nếu xóa bảng này thì phải đóng đoạn chương trình này lại để tránh gây lỗi.
+
+<p align="center">
+    <img src="./avatar/screenshot14.png" width="640"  />
+</p>
+
+<h3 align="center">
+
+*Đóng đoạn chương trình đang được chọn vì chứa hàm get_option() có gọi Option Model*
+
+</h3>
 
 # [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with-love-and-php)
