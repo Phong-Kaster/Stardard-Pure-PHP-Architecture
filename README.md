@@ -20,7 +20,8 @@
 - [**Copy A Front-end Website**](#copy-a-front-end-website)
 - [**FAQ**](#faq)
   - [**1. Can't Press Ctrl + U or Right-Click with Mouse**](#1-cant-press-ctrl--u-or-right-click-with-mouse)
-  - [**Get Rid Of A Table From Source**](#get-rid-of-a-table-from-source)
+  - [**2. Get Rid Of A Table From Source**](#2-get-rid-of-a-table-from-source)
+  - [**3. Change port 80 to port 8080**](#3-change-port-80-to-port-8080)
 - [**Made with 💘 and PHP <img src="https://www.vectorlogo.zone/logos/php/php-horizontal.svg" width="60">**](#made-with--and-php-)
 
 # [**Initialization**](#initialization)
@@ -365,7 +366,7 @@ Ví dụ: để xem trang shop-load-more.html nhưng trang này bị khóa các 
 
     view-source:https://bestwebcreator.com/shopwise/demo/shop-load-more.html
 
-## [**Get Rid Of A Table From Source**](#get-rid-of-a-table-from-source)
+## [**2. Get Rid Of A Table From Source**](#get-rid-of-a-table-from-source)
 
 Loại bỏ sự tồn tại của một bảng đã được tạo sẵn trong source code này bao gồm quy trình 4 bước 
 
@@ -412,6 +413,38 @@ Bảng OPTION này sẽ lưu lại tùy chọn để sử dụng ReCaptcha. Nế
 <h3 align="center">
 
 *Đóng đoạn chương trình đang được chọn vì chứa hàm get_option() có gọi Option Model*
+
+</h3>
+
+## [**3. Change port 80 to port 8080**](#3-change-port-80-to-port-8080)
+
+Để sửa từ port 80 sang port 8080 hoặc bất kì port nào bạn muốn. Hãy tìm tới thư mục `index.php` ở thư mục gốc.
+
+<p align="center">
+    <img src="./avatar/screenshot15.png"/>
+</p>
+
+Tìm tới đoạn code như hình bên dưới: 
+
+<p align="center">
+    <img src="./avatar/screenshot16.png" width="640" />
+</p>
+
+<h3 align="center">
+
+*Tìm tới đoạn code bắt đầu từ dòng 46 đến dòng 50*
+
+</h3>
+
+Ví dụ để chuyển sang từ port 80 sang port 8080 thì thêm cụm từ `:8080` giống như hình dưới đây:
+
+<p align="center">
+    <img src="./avatar/screenshot17.png"  width="640"/>
+</p>
+
+<h3 align="center">
+
+*Thêm cụm `:8080` hoặc bất kì port nào bạn muốn vào vị trí như hình*
 
 </h3>
 
